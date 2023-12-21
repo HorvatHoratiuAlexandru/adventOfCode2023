@@ -7,7 +7,7 @@ for map in MAPS:
     input[map] = []
 
 whitespace_counter = 0
-with open("test.txt", "r+") as f:
+with open("input.txt", "r+") as f:
     
     for line in f:
         if line == "\n":
@@ -43,11 +43,11 @@ def get_min_seeds(seed, rg, map):
             rng = int(map_line[2])
             dst = int(map_line[0])
 
-            if sd >= src and sd <= src + rng:
+            if sd >= src and sd <= src + rng - 1:
 
-                if sd + rg > src + rng:
+                if sd + rg -1 > src + rng -1:
                     new_range = (sd+rg) - (src+rng)
-                    new_seed = src+rng+1
+                    new_seed = src+rng
                     rg = new_seed-sd
                     get_min_seeds(new_seed, new_range, counter)
 
@@ -60,4 +60,4 @@ for s, r in zip(seeds, ranges):
     get_min_seeds(s,r,1)
 
 # Dunno why the answer is offset by + 1 ????
-print(min(answer_list)-1)
+print(min(answer_list))
